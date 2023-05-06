@@ -1,6 +1,4 @@
 // setting size of the canvas
-
-
 // create images 
 const backgroundImg= new Image();
 backgroundImg.src= './images/background.png';
@@ -15,12 +13,13 @@ birdImg.src= './images/birds/bird1.png';
 const cloudImg= new Image();
 cloudImg.src= './images/clouds/cloud1.png';
 
+canvas.setAttribute('width',window.innerWidth)
 // create game area
 const myGameArea ={
     canvas: document.getElementById('canvas'),
     frames: 0,
-    width: this.canvas.width,
-    height: this.canvas.height,
+    width: 1460, //canvas.setAttribute('width',window.innerWidth)
+    height: 1095,
     context: null,
     interval: null,
 
@@ -40,7 +39,7 @@ const myGameArea ={
 
 
 //create plane
-class component {
+class Component {
     constructor(x, y, width, height ){
         this.x= x;
         this.y= y;
@@ -94,17 +93,19 @@ class component {
     }
 }
 
+
+
 //create
-const plane = new component(80, myGameArea.height/2, 443/2,302/2)
+const plane = new Component(80, myGameArea.height/2, 443/2,302/2)
 
 //create birds
-myBirds = [];
+let myBirds = [];
 function updateBirds(){
     myGameArea.frames +=1;
 
     if (myGameArea.frames % 120 === 0) {
         let y= Math.random()*myGameArea.height;
-        myBirds.push(new component(myGameArea.width, y, 133 ,100))
+        myBirds.push(new Component(myGameArea.width-150, y, 133 ,100))
     }
 
     for(let i=0; i <myBirds.length; i++){
@@ -114,13 +115,13 @@ function updateBirds(){
 }
 
 //create clouds
-myClouds = [];
+let myClouds = [];
 function updateClouds(){
     myGameArea.frames +=1;
 
     if(myGameArea.frames % 240 === 0){
         let y= Math.random()*myGameArea.height;
-        myClouds.push(new component(myGameArea.width, y, 100, 90))
+        myClouds.push(new Component(myGameArea.width, y, 100, 90))
     }
 
     for(let i=0; i< myClouds.length; i++){
@@ -154,7 +155,7 @@ function updateGameArea(){
     plane.updatePlane();
     updateBirds();
     checkGameOver();
-    updateClouds();
+    // updateClouds();
 };
 
 
