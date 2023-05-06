@@ -1,19 +1,15 @@
-// setting size of the canvas
-
-
 // create images 
 const backgroundImg= new Image();
 backgroundImg.src= './images/background.png';
-const planeImg1= new Image();
-planeImg1.src= './images/plane/Fly (1).png';
-const planeImg2= new Image();
-planeImg2.src= './images/plane/Fly (2).png';
-
+const planeImg= new Image();
+planeImg.src= './images/plane/Fly (1).png';
 const birdImg= new Image();
 birdImg.src= './images/birds/bird1.png';
-
 const cloudImg= new Image();
 cloudImg.src= './images/clouds/cloud1.png';
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 // create game area
 const myGameArea ={
@@ -53,23 +49,13 @@ class component {
 
     updatePlane(){
         const ctx = myGameArea.context;
-        if (myGameArea.frames % 2 === 0) {
-            ctx.drawImage(planeImg2, this.x, this.y, this.width, this.height);
-           } else {
-            ctx.drawImage(planeImg1, this.x, this.y, this.width, this.height)
-           };
+        ctx.drawImage(planeImg, this.x, this.y, this.width, this.height);
     }
 
     updateBirds(){
         const ctx = myGameArea.context;
         ctx.drawImage(birdImg, this.x, this.y, this.width, this.height);
     }
-
-    updateClouds(){
-        const ctx = myGameArea.context;
-        ctx.drawImage(cloudImg, this.x, this.y, this.width, this.height);
-    }
-
 
     newPos(){
         this.x += this.speedX;
@@ -118,7 +104,7 @@ myClouds = [];
 function updateClouds(){
     myGameArea.frames +=1;
 
-    if(myGameArea.frames % 240 === 0){
+    if(myGameArea.frames % 120 == 0){
         let y= Math.random()*myGameArea.height;
         myClouds.push(new component(myGameArea.width, y, 100, 90))
     }
@@ -127,6 +113,8 @@ function updateClouds(){
         myClouds[i].x -=1;
         myClouds[i].updateClouds();
     }
+    let y= Math.random()*myGameArea.height;
+    myClouds
 
 }
 
@@ -154,7 +142,6 @@ function updateGameArea(){
     plane.updatePlane();
     updateBirds();
     checkGameOver();
-    updateClouds();
 };
 
 
@@ -199,8 +186,19 @@ document.addEventListener('keyup', (e) => {
     plane.speedY = 0;
 });
 
-window.onload = () => {
+document.getElementById('game-board').style.display = 'none';
+
+ window.onload = () => {
     document.getElementById('start-button').onclick= () => {
-        myGameArea.start()
-    }
-}
+       myGameArea.start()
+       document.getElementById('game-board').style.display = 'block';
+       document.getElementById('game-intro').style.display = 'none';
+
+    
+       
+    
+       
+     }
+ }
+
+// myGameArea.start();

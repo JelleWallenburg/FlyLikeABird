@@ -5,7 +5,6 @@ body {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    
 }
 
 #start-screen {
@@ -77,8 +76,4 @@ button:hover {
   width: 50px;
   height: auto;
   margin: 0px 20px;
-}
-
-canvas {
-    display: none;
 }
