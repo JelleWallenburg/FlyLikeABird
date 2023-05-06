@@ -117,15 +117,15 @@ function updateClouds(){
 
 
 // check if plane hit birds
-// function checkGameOver(){
-//     const crashed = myBirds.some(function (bird) {
-//       return plane.crashWith(bird);
-//     })
+function checkGameOver(){
+    const crashed = myBirds.some(function (bird) {
+      return plane.crashWith(bird);
+    })
   
-//     if (crashed) {
-//       myGameArea.stop();
-//     }
-//   }
+    if (crashed) {
+      myGameArea.stop();
+    }
+  }
 
 
 
