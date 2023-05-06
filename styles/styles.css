@@ -1,7 +1,7 @@
 body {
     font-family: Arial;
     color: white;
-    background-image: url("images/background.png");
+    background-image: url("../images/background.png");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -77,4 +77,8 @@ button:hover {
   width: 50px;
   height: auto;
   margin: 0px 20px;
+}
+
+canvas {
+    display: none;
 }
