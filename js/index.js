@@ -5,8 +5,8 @@ const planeImg= new Image();
 planeImg.src= './images/plane/Fly (1).png';
 const birdImg= new Image();
 birdImg.src= './images/birds/bird1.png';
-// const cloudImg= new Image();
-// cloudImg.src= 
+const cloudImg= new Image();
+cloudImg.src= './images'
 
 // create game area
 const myGameArea ={
