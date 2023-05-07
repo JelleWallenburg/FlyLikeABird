@@ -127,6 +127,8 @@ function checkGameOver(){
   
     if (crashed) {
       myGameArea.stop();
+      document.getElementById('end-screen').style.display ='block';
+      document.getElementById('game-board').style.display = 'none';
     }
   }
 
@@ -193,12 +195,13 @@ document.getElementById('game-board').style.display = 'none';
        myGameArea.start()
        document.getElementById('game-board').style.display = 'block';
        document.getElementById('game-intro').style.display = 'none';
-
-    
-       
-    
        
      }
  }
+
+ document.getElementById('restart-button').onclick= () => {
+    
+ 
+  }
 
 // myGameArea.start();
