@@ -1,7 +1,7 @@
-// setting size of the canvas
 // create images 
 const backgroundImg= new Image();
 backgroundImg.src= './images/background.png';
+
 const planeImg1= new Image();
 planeImg1.src= './images/plane/Fly (1).png';
 const planeImg2= new Image();
@@ -13,7 +13,10 @@ birdImg.src= './images/birds/bird1.png';
 const cloudImg= new Image();
 cloudImg.src= './images/clouds/cloud1.png';
 
+// setting size of the canvas
 canvas.setAttribute('width',window.innerWidth)
+
+
 // create game area
 const myGameArea ={
     canvas: document.getElementById('canvas'),
