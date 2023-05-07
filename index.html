@@ -6,18 +6,53 @@
     </head>
     <body>
         <div id= "game-intro">
-            <h1>Fly Like A Bird</h1>
-            <img src= "./images/plane/Shoot (3).png" alt="" />
-            <br>
-            <button id= "start-button">Start flying like a bird!</button>
-            <p>Fly like a bird and do not fly into other birds</p>
+            <div id="start-screen">
+                <div id="title">
+                    <!-- <img src= "./images/plane/Shoot (3).png" alt="Shooting Plane" class="shooting-plane" />--> 
+                    <h1>Fly Like A Bird</h1>
+                    <!-- <img src= "./images/plane/Shoot (3).png" alt="Shooting Plane" class="shooting-plane" />--> 
+                </div>
+                <img src= "./images/plane/Shoot (3).png" alt="Shooting Plane" id="shooting-plane" />
+             <button id= "start-button">Start flying like a bird!</button>
+             <div id="birds">
+            <!-- <img src= "./images/birds/bird1.png" alt="Bird" class="bird" /> --> 
+             <!--<img src= "./images/birds/bird1.png" alt="Bird" class="bird" /> --> 
+            </div>
+            </div>
+        <div id="instructions">
+            <h2>Instructions</h2>
+            <ol>
+                <li>Press the button to <span id="start">start the game</span></li>
+                <li>Use your keyboard arrow keys to move the <img src= "./images/plane/Shoot (3).png" alt="Shooting Plane" class="shooting-plane-instructions" /></li>
+                <li>Avoid the  <img src= "./images/birds/bird1.png" alt="Bird" class="bird-instructions" /> incoming</li>
+                <li>If you hit a  <img src= "./images/birds/bird1.png" alt="Bird" class="bird-instructions" /> it's <span id="game-over">GAME OVER</span></li>
+            </ol>
         </div>
+    </div>
 
         <div id= "game-board">
-            <canvas id= "canvas"  height=1095 width=1095></canvas>
+            <canvas id= "canvas"  height=1000 width=1000></canvas>
+        </div>
+
+        <div id="end-screen">
+            <div id="flexbox">
+            <div>
+                <img src= "./images/birds/bird1.png" alt="Bird" class="bird-end" />
+            </div>
+            <div id="over">
+                <h1>GAME OVER</h1>
+                <h2>The birds won, you died</h2>
+                <img src="./images/plane/Dead (1).png" alt="Dead Plane" id="dead-plane">
+                <button id="restart-button">TRY AGAIN</button>
+            </div>
+            <div>
+                <img src= "./images/birds/bird1.png" alt="Bird" class="bird-end" />
+            </div>
+        </div>
         </div>
 
         <script type="text/javascript" src= "./js/index.js"></script>
     </body>
+
 
 </html>

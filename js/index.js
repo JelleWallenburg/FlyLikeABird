@@ -14,20 +14,19 @@ const cloudImg= new Image();
 cloudImg.src= './images/clouds/cloud1.png';
 
 // setting size of the canvas
-canvas.setAttribute('width',window.innerWidth)
-
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 // create game area
 const myGameArea ={
     canvas: document.getElementById('canvas'),
+    context: this.canvas.getContext('2d'),
     frames: 0,
-    width: 1460, //canvas.setAttribute('width',window.innerWidth)
-    height: 1095,
-    context: null,
+    width: this.canvas.width,
+    height: this.canvas.height,
     interval: null,
 
     start: function(){
-        this.context=this.canvas.getContext('2d');
         this.interval= setInterval(updateGameArea, 10);
     },
 
@@ -42,7 +41,7 @@ const myGameArea ={
 
 
 //create plane
-class Component {
+class component {
     constructor(x, y, width, height ){
         this.x= x;
         this.y= y;
@@ -54,24 +53,16 @@ class Component {
     }
 
     updatePlane(){
-        const ctx = myGameArea.context;
         if (myGameArea.frames % 2 === 0) {
-            ctx.drawImage(planeImg2, this.x, this.y, this.width, this.height);
+            myGameArea.context.drawImage(planeImg2, this.x, this.y, this.width, this.height);
            } else {
-            ctx.drawImage(planeImg1, this.x, this.y, this.width, this.height)
+            myGameArea.context.drawImage(planeImg1, this.x, this.y, this.width, this.height);
            };
     }
 
     updateBirds(){
-        const ctx = myGameArea.context;
-        ctx.drawImage(birdImg, this.x, this.y, this.width, this.height);
+        myGameArea.context.drawImage(birdImg, this.x, this.y, this.width, this.height);
     }
-
-    updateClouds(){
-        const ctx = myGameArea.context;
-        ctx.drawImage(cloudImg, this.x, this.y, this.width, this.height);
-    }
-
 
     newPos(){
         this.x += this.speedX;
@@ -96,10 +87,8 @@ class Component {
     }
 }
 
-
-
 //create
-const plane = new Component(80, myGameArea.height/2, 443/2,302/2)
+let plane = new component(80, myGameArea.height/2, 443/2,302/2);
 
 //create birds
 let myBirds = [];
@@ -108,7 +97,7 @@ function updateBirds(){
 
     if (myGameArea.frames % 120 === 0) {
         let y= Math.random()*myGameArea.height;
-        myBirds.push(new Component(myGameArea.width-150, y, 133 ,100))
+        myBirds.push(new component(myGameArea.width, y, 133 ,100))
     }
 
     for(let i=0; i <myBirds.length; i++){
@@ -119,20 +108,20 @@ function updateBirds(){
 
 //create clouds
 let myClouds = [];
-function updateClouds(){
-    myGameArea.frames +=1;
+// function updateClouds(){
+//     myGameArea.frames +=1;
 
-    if(myGameArea.frames % 240 === 0){
-        let y= Math.random()*myGameArea.height;
-        myClouds.push(new Component(myGameArea.width, y, 100, 90))
-    }
+//     if(myGameArea.frames % 120 == 0){
+//         let y= Math.random()*myGameArea.height;
+//         myClouds.push(new component(myGameArea.width, y, 100, 90))
+//     }
 
-    for(let i=0; i< myClouds.length; i++){
-        myClouds[i].x -=1;
-        myClouds[i].updateClouds();
-    }
-
-}
+//     for(let i=0; i< myClouds.length; i++){
+//         myClouds[i].x -=1;
+//         myClouds[i].updateClouds();
+//     }
+//     let y= Math.random()*myGameArea.height;
+// }
 
 
 // check if plane hit birds
@@ -143,12 +132,26 @@ function checkGameOver(){
   
     if (crashed) {
       myGameArea.stop();
+      document.getElementById('end-screen').style.display ='block';
+      document.getElementById('game-board').style.display = 'none';
     }
-  }
+}
 
+// reset global variables
+function resetGlobalVariables(){
+    myClouds= [];
+    myBirds= [];
+    myGameArea.frames=0;
+    plane = new component(80, myGameArea.height/2, 443/2,302/2);
+}
 
-
-
+function score(){
+    let points = Math.floor(myGameArea.frames/5);
+    myGameArea.context.font= '30px serif';
+    myGameArea.context.fillStyle = 'black';
+    myGameArea.context.drawImage(cloudImg, myGameArea.width - 250, 20, 220, 100);
+    myGameArea.context.fillText(`Score: ${points}`, myGameArea.width - 200, 70);
+}
 
 //update game area
 function updateGameArea(){
@@ -158,10 +161,8 @@ function updateGameArea(){
     plane.updatePlane();
     updateBirds();
     checkGameOver();
-    // updateClouds();
+    score();
 };
-
-
 
 //controls
 document.addEventListener('keydown', (e) => {
@@ -195,7 +196,6 @@ document.addEventListener('keydown', (e) => {
         }
         break;
     }
-
 });
 
 document.addEventListener('keyup', (e) => {
@@ -203,8 +203,19 @@ document.addEventListener('keyup', (e) => {
     plane.speedY = 0;
 });
 
+document.getElementById('game-board').style.display = 'none';
+
 window.onload = () => {
     document.getElementById('start-button').onclick= () => {
-        myGameArea.start()
+       myGameArea.start()
+       document.getElementById('game-board').style.display = 'block';
+       document.getElementById('game-intro').style.display = 'none'; 
+     }
+
+     document.getElementById('restart-button').onclick= () =>{
+        document.getElementById('game-board').style.display = 'block';
+        document.getElementById('end-screen').style.display = 'none';
+        resetGlobalVariables();
+        myGameArea.start();
     }
 }
