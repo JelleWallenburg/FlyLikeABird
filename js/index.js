@@ -13,6 +13,9 @@ birdImg.src= './images/birds/bird1.png';
 const cloudImg= new Image();
 cloudImg.src= './images/clouds/cloud1.png';
 
+const bulletImg= new Image();
+bulletImg.src=
+
 // setting size of the canvas
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -87,6 +90,19 @@ class component {
     }
 }
 
+// class bullets {
+//     constructor(x,y){
+//        this.x=x;
+//        this.y=y;
+//        this.radio=3
+//     }
+
+//     updateBullets(){
+
+//     }
+// }
+ 
+
 //create
 let plane = new component(80, myGameArea.height/2, 443/2,302/2);
 
@@ -134,6 +150,7 @@ function checkGameOver(){
       myGameArea.stop();
       document.getElementById('end-screen').style.display ='block';
       document.getElementById('game-board').style.display = 'none';
+      document.getElementById('endscore').innerHTML= points;
     }
 }
 
@@ -145,8 +162,9 @@ function resetGlobalVariables(){
     plane = new component(80, myGameArea.height/2, 443/2,302/2);
 }
 
+let points= null;
 function score(){
-    let points = Math.floor(myGameArea.frames/5);
+    points = Math.floor(myGameArea.frames/5);
     myGameArea.context.font= '30px serif';
     myGameArea.context.fillStyle = 'black';
     myGameArea.context.drawImage(cloudImg, myGameArea.width - 250, 20, 220, 100);
@@ -210,8 +228,7 @@ window.onload = () => {
        myGameArea.start()
        document.getElementById('game-board').style.display = 'block';
        document.getElementById('game-intro').style.display = 'none'; 
-     }
-
+    }
      document.getElementById('restart-button').onclick= () =>{
         document.getElementById('game-board').style.display = 'block';
         document.getElementById('end-screen').style.display = 'none';
