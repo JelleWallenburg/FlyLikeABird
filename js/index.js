@@ -7,6 +7,9 @@ planeImg1.src= './images/plane/Fly (1).png';
 const planeImg2= new Image();
 planeImg2.src= './images/plane/Fly (2).png';
 
+const bullets= new Image();
+bullets.src='images/bullet/Bullet (1).png'
+
 const birdImg= new Image();
 birdImg.src= './images/birds/bird1.png';
 
@@ -14,7 +17,11 @@ const cloudImg= new Image();
 cloudImg.src= './images/clouds/cloud1.png';
 
 const bulletImg= new Image();
-bulletImg.src=
+bulletImg.src= './images/bullet/Bullet (1).png';;
+
+let audio = document.getElementById("audio");
+audio.autoplay = true;
+
 
 // setting size of the canvas
 canvas.width = window.innerWidth;
@@ -90,17 +97,20 @@ class component {
     }
 }
 
-// class bullets {
-//     constructor(x,y){
-//        this.x=x;
-//        this.y=y;
-//        this.radio=3
-//     }
+// class bullet {
+  //  constructor(x,y,width,height, velocity){
+    //    this.x=x;
+      //  this.y=y;
+       // this.width=width;
+       // this.height=height;
+       // this.velocity=velocity;
+     //   this.radius=3
+     //}
 
-//     updateBullets(){
-
-//     }
-// }
+     //updateBullets(){
+     //myGameArea.context.drawImage(bullets, plane.x, plane.y, this.width, this.height, 3);
+    // }
+//}
  
 
 //create
@@ -151,6 +161,7 @@ function checkGameOver(){
       document.getElementById('end-screen').style.display ='block';
       document.getElementById('game-board').style.display = 'none';
       document.getElementById('endscore').innerHTML= points;
+      audio.autoplay = false;
     }
 }
 
@@ -213,6 +224,10 @@ document.addEventListener('keydown', (e) => {
             plane.speedX = 1;  
         }
         break;
+        //case 49: // spacebar
+        //myGameArea.context.drawImage(bullets, plane.x, plane.y, 10, 10, 0);
+       //break;
+        
     }
 });
 
@@ -227,7 +242,8 @@ window.onload = () => {
     document.getElementById('start-button').onclick= () => {
        myGameArea.start()
        document.getElementById('game-board').style.display = 'block';
-       document.getElementById('game-intro').style.display = 'none'; 
+       document.getElementById('game-intro').style.display = 'none';
+       audio.load();
     }
      document.getElementById('restart-button').onclick= () =>{
         document.getElementById('game-board').style.display = 'block';
