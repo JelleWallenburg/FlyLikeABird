@@ -17,7 +17,11 @@ const cloudImg= new Image();
 cloudImg.src= './images/clouds/cloud1.png';
 
 const bulletImg= new Image();
-bulletImg.src=
+bulletImg.src= './images/bullet/Bullet (1).png';;
+
+let audio = document.getElementById("audio");
+audio.autoplay = true;
+
 
 // setting size of the canvas
 canvas.width = window.innerWidth;
@@ -157,6 +161,7 @@ function checkGameOver(){
       document.getElementById('end-screen').style.display ='block';
       document.getElementById('game-board').style.display = 'none';
       document.getElementById('endscore').innerHTML= points;
+      audio.autoplay = false;
     }
 }
 
@@ -237,7 +242,8 @@ window.onload = () => {
     document.getElementById('start-button').onclick= () => {
        myGameArea.start()
        document.getElementById('game-board').style.display = 'block';
-       document.getElementById('game-intro').style.display = 'none'; 
+       document.getElementById('game-intro').style.display = 'none';
+       audio.load();
     }
      document.getElementById('restart-button').onclick= () =>{
         document.getElementById('game-board').style.display = 'block';
