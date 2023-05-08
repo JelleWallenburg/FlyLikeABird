@@ -7,6 +7,9 @@ planeImg1.src= './images/plane/Fly (1).png';
 const planeImg2= new Image();
 planeImg2.src= './images/plane/Fly (2).png';
 
+const bullets= new Image();
+bullets.src='images/bullet/Bullet (1).png'
+
 const birdImg= new Image();
 birdImg.src= './images/birds/bird1.png';
 
@@ -90,17 +93,20 @@ class component {
     }
 }
 
-// class bullets {
-//     constructor(x,y){
-//        this.x=x;
-//        this.y=y;
-//        this.radio=3
-//     }
+// class bullet {
+  //  constructor(x,y,width,height, velocity){
+    //    this.x=x;
+      //  this.y=y;
+       // this.width=width;
+       // this.height=height;
+       // this.velocity=velocity;
+     //   this.radius=3
+     //}
 
-//     updateBullets(){
-
-//     }
-// }
+     //updateBullets(){
+     //myGameArea.context.drawImage(bullets, plane.x, plane.y, this.width, this.height, 3);
+    // }
+//}
  
 
 //create
@@ -213,6 +219,10 @@ document.addEventListener('keydown', (e) => {
             plane.speedX = 1;  
         }
         break;
+        //case 49: // spacebar
+        //myGameArea.context.drawImage(bullets, plane.x, plane.y, 10, 10, 0);
+       //break;
+        
     }
 });
 
