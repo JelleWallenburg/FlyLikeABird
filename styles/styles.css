@@ -122,12 +122,27 @@ button:hover {
   margin-right: 10px;
 }
 
+#instructions {
+  background-image: url("../images/clouds/cloud1.png");
+  width: 450px; 
+  color: black;
+  background-size:cover;
+  padding: 100px 100px 100px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #instructions > h2 {
   margin-bottom: 30px;
 }
 
+/* #instructions >ol {
+  padding: 100px 100px 100px 100px;
+} */
+
 #instructions > ol > li {
-  margin: 35px 0px;
+  margin: 20px 0px;
   
 }
 
