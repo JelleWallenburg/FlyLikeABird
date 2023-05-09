@@ -7,17 +7,22 @@ planeImg1.src= './images/plane/Fly (1).png';
 const planeImg2= new Image();
 planeImg2.src= './images/plane/Fly (2).png';
 
-const bullets= new Image();
-bullets.src='images/bullet/Bullet (1).png'
-
 const birdImg= new Image();
 birdImg.src= './images/birds/bird1.png';
 
 const cloudImg= new Image();
 cloudImg.src= './images/clouds/cloud1.png';
 
-const bulletImg= new Image();
-bulletImg.src= './images/bullet/Bullet (1).png';;
+const bulletImg1= new Image();
+bulletImg1.src='images/bullet/Bullet (1).png'
+const bulletImg2= new Image();
+bulletImg2.src='images/bullet/Bullet (2).png'
+const bulletImg3= new Image();
+bulletImg3.src='images/bullet/Bullet (3).png'
+const bulletImg4= new Image();
+bulletImg4.src='images/bullet/Bullet (4).png'
+const bulletImg5= new Image();
+bulletImg5.src='images/bullet/Bullet (5).png'
 
 // audio
 let audio = document.getElementById("audio");
@@ -25,8 +30,8 @@ let gameOverAudio = document.getElementById("game-over-audio");
 
 
 // setting size of the canvas
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight - 4;
+canvas.width = window.innerWidth-4;
+canvas.height = window.innerHeight-4;
 
 // create game area
 const myGameArea ={
@@ -64,16 +69,39 @@ class component {
     }
 
     updatePlane(){
+
+
+
+
         if (myGameArea.frames % 2 === 0) {
             myGameArea.context.drawImage(planeImg2, this.x, this.y, this.width, this.height);
            } else {
             myGameArea.context.drawImage(planeImg1, this.x, this.y, this.width, this.height);
            };
+
     }
 
     updateBirds(){
         myGameArea.context.drawImage(birdImg, this.x, this.y, this.width, this.height);
     }
+
+    updateClouds(){
+        myGameArea.context.drawImage(cloudImg, this.x, this.y, this.width, this.height);
+    } 
+
+    updateBullets(){
+        if (myGameArea.frames % 5 === 0){
+            myGameArea.context.drawImage(bulletImg1, this.x, this.y, this.width, this.height);
+        } else if (myGameArea.frames % 4 === 0){
+            myGameArea.context.drawImage(bulletImg2, this.x, this.y, this.width, this.height);
+         }else if (myGameArea.frames % 3 === 0){
+            myGameArea.context.drawImage(bulletImg3, this.x, this.y, this.width, this.height);
+        } else if (myGameArea.frames % 2 === 0){
+            myGameArea.context.drawImage(bulletImg4, this.x, this.y, this.width, this.height);
+        } else {
+            myGameArea.context.drawImage(bulletImg5, this.x, this.y, this.width, this.height);
+        }
+    }  
 
     newPos(){
         this.x += this.speedX;
@@ -118,9 +146,9 @@ let myBirds = [];
 function updateBirds(){
     myGameArea.frames +=1;
 
-    if (myGameArea.frames % 120 === 0) {
+    if (myGameArea.frames % 150 === 0) {
         let y= Math.random()*myGameArea.height;
-        myBirds.push(new component(myGameArea.width, y, 133 ,100))
+        myBirds.push(new component(myGameArea.width, y, 100 ,70))
     }
 
     for(let i=0; i <myBirds.length; i++){
@@ -129,14 +157,14 @@ function updateBirds(){
     }
 }
 
-//create clouds
+
 let myClouds = [];
 function updateClouds(){
-    myGameArea.frames +=1;
+    // myGameArea.frames +=1;
 
     if(myGameArea.frames % 120 == 0){
         let y= Math.random()*myGameArea.height;
-        myClouds.push(new component(myGameArea.width, y, 100, 90))
+        myClouds.push(new component(myGameArea.width, y, 150, 100))
     }
 
     for(let i=0; i< myClouds.length; i++){
@@ -148,23 +176,13 @@ function updateClouds(){
 
 // create bullets
 let myBullets =[];
-class bullet {
-   constructor(x, y, width, height, velocity){
-       this.x=x;
-       this.y=y;
-       this.width=width;
-       this.height=height;
-       this.velocity=velocity;
-     }
-
-     updateBullets(){
-     myGameArea.context.drawImage(bullets, plane.x, plane.y, this.width, this.height, 3);
-    }
-
-    newPos(){
-        this.x += this.velocity;
+function updateBullets(){
+    for(let i=0; i < myBullets.length; i++){
+        myBullets[i].x +=2;
+        myBullets[i].updateBullets();
     }
 }
+
 
 //controls
 document.addEventListener('keydown', (e) => {
@@ -197,12 +215,19 @@ document.addEventListener('keydown', (e) => {
             plane.speedX = 1;  
         }
         break;
-        case 49: // spacebar
-        myBullets.push(new bullet(plane.x, plane.y, 10, 10, 3))
-        break;
-        
+      case 32: // spacebar
+        myBullets.push(new component((plane.x+0.7*plane.width), (plane.y+0.65*plane.height), 40, 40))
+        break; 
     }
 });
+
+
+// document.addEventListener('keydown', (e) => {
+//     switch (e.keyCode) {
+//         case 32:
+
+//     }
+
 
 document.addEventListener('keyup', (e) => {
     plane.speedX = 0;
@@ -254,6 +279,8 @@ function updateGameArea(){
     plane.newPos();
     plane.updatePlane();
     updateBirds();
+    updateClouds();
+    updateBullets();
     checkGameOver();
     score();
 };
