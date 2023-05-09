@@ -210,11 +210,11 @@ document.addEventListener('keydown', (e) => {
 });
 
 
-document.addEventListener('keydown', (e) => {
-    switch (e.keyCode) {
-        case 32:
-            
-    }
+// document.addEventListener('keydown', (e) => {
+//     switch (e.keyCode) {
+//         case 32:
+
+//     }
 
 
 document.addEventListener('keyup', (e) => {
