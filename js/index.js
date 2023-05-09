@@ -21,12 +21,12 @@ bulletImg.src= './images/bullet/Bullet (1).png';;
 
 // audio
 let audio = document.getElementById("audio");
-let startingAudio = document.getElementById("starting-audio");
+let gameOverAudio = document.getElementById("game-over-audio");
 
 
 // setting size of the canvas
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.height = window.innerHeight - 4;
 
 // create game area
 const myGameArea ={
@@ -98,6 +98,18 @@ class component {
     }
 }
 
+class componentx {
+    constructor(x, y, width, height ){
+        this.x= x;
+        this.y= y;
+        this.width= width;
+        this.height= height;
+
+        this.speedX = 0;
+        this.speedY = 0;
+    }
+}
+
 //create plane
 let plane = new component(80, myGameArea.height/2, 443/2,302/2);
 
@@ -119,20 +131,20 @@ function updateBirds(){
 
 //create clouds
 let myClouds = [];
-// function updateClouds(){
-//     myGameArea.frames +=1;
+function updateClouds(){
+    myGameArea.frames +=1;
 
-//     if(myGameArea.frames % 120 == 0){
-//         let y= Math.random()*myGameArea.height;
-//         myClouds.push(new component(myGameArea.width, y, 100, 90))
-//     }
+    if(myGameArea.frames % 120 == 0){
+        let y= Math.random()*myGameArea.height;
+        myClouds.push(new component(myGameArea.width, y, 100, 90))
+    }
 
-//     for(let i=0; i< myClouds.length; i++){
-//         myClouds[i].x -=1;
-//         myClouds[i].updateClouds();
-//     }
-//     let y= Math.random()*myGameArea.height;
-// }
+    for(let i=0; i< myClouds.length; i++){
+        myClouds[i].x -=1;
+        myClouds[i].updateClouds();
+    }
+    let y= Math.random()*myGameArea.height;
+}
 
 // create bullets
 let myBullets =[];
@@ -143,7 +155,6 @@ class bullet {
        this.width=width;
        this.height=height;
        this.velocity=velocity;
-//    this.radius=3
      }
 
      updateBullets(){
@@ -152,7 +163,6 @@ class bullet {
 
     newPos(){
         this.x += this.velocity;
-        
     }
 }
 
@@ -210,9 +220,14 @@ function checkGameOver(){
       document.getElementById('end-screen').style.display ='block';
       document.getElementById('game-board').style.display = 'none';
       document.getElementById('endscore').innerHTML= points;
+      document.getElementById("audio").muted = true;
+      gameOverAudio.play();
+      
+      
 
     }
 }
+console.log(gameOverAudio);
 
 // reset global variables
 function resetGlobalVariables(){
@@ -253,13 +268,15 @@ window.onload = () => {
        myGameArea.start()
        document.getElementById('game-board').style.display = 'block';
        document.getElementById('game-intro').style.display = 'none';
-       audio.load();
+       audio.play();
     }
 
 // try again button
      document.getElementById('restart-button').onclick= () =>{
         document.getElementById('game-board').style.display = 'block';
         document.getElementById('end-screen').style.display = 'none';
+        document.getElementById("game-over-audio").muted = true;
+        document.getElementById("audio").muted = false;
         resetGlobalVariables();
         myGameArea.start();
     }

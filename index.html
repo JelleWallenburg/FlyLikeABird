@@ -5,11 +5,6 @@
         <link rel="stylesheet" href= "styles/styles.css" />
     </head>
     <body>
-
-        <audio  id="starting-audio" autoplay>
-            <source src="/music/Starting-Screen.mp3" type="audio/mpeg">
-        </audio>
-
         <div id= "game-intro">
             <div id="start-screen">
                 <div id="title">
@@ -35,7 +30,7 @@
 
         <div id= "game-board">
             <audio  id="audio" autoplay loop="loop">
-                <source src="/music/birds.mp3" type="audio/mpeg">
+                <source src="./music/birds.mp3" type="audio/mpeg">
             </audio>
             <canvas id= "canvas"  height=1000 width=1000></canvas>
         </div>
@@ -55,9 +50,13 @@
                 </div>
                 <div>
                     <img src= "./images/birds/bird1.png" alt="Bird" class="bird-end" />
+                    
                 </div>
             </div>
         </div>
+        <audio  id="game-over-audio" autoplay loop="loop">
+            <source src="./music/game-over.mp3" type="audio/mpeg" >
+        </audio>
 
         <script type="text/javascript" src= "./js/index.js"></script>
     </body>
