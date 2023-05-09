@@ -19,8 +19,9 @@ cloudImg.src= './images/clouds/cloud1.png';
 const bulletImg= new Image();
 bulletImg.src= './images/bullet/Bullet (1).png';;
 
+// audio
 let audio = document.getElementById("audio");
-audio.autoplay = true;
+let startingAudio = document.getElementById("starting-audio");
 
 
 // setting size of the canvas
@@ -50,7 +51,7 @@ const myGameArea ={
 };
 
 
-//create plane
+//create class for plane and birds
 class component {
     constructor(x, y, width, height ){
         this.x= x;
@@ -97,23 +98,7 @@ class component {
     }
 }
 
-// class bullet {
-  //  constructor(x,y,width,height, velocity){
-    //    this.x=x;
-      //  this.y=y;
-       // this.width=width;
-       // this.height=height;
-       // this.velocity=velocity;
-     //   this.radius=3
-     //}
-
-     //updateBullets(){
-     //myGameArea.context.drawImage(bullets, plane.x, plane.y, this.width, this.height, 3);
-    // }
-//}
- 
-
-//create
+//create plane
 let plane = new component(80, myGameArea.height/2, 443/2,302/2);
 
 //create birds
@@ -149,49 +134,27 @@ let myClouds = [];
 //     let y= Math.random()*myGameArea.height;
 // }
 
+// create bullets
+let myBullets =[];
+class bullet {
+   constructor(x, y, width, height, velocity){
+       this.x=x;
+       this.y=y;
+       this.width=width;
+       this.height=height;
+       this.velocity=velocity;
+//    this.radius=3
+     }
 
-// check if plane hit birds
-function checkGameOver(){
-    const crashed = myBirds.some(function (bird) {
-      return plane.crashWith(bird);
-    })
-  
-    if (crashed) {
-      myGameArea.stop();
-      document.getElementById('end-screen').style.display ='block';
-      document.getElementById('game-board').style.display = 'none';
-      document.getElementById('endscore').innerHTML= points;
-      audio.autoplay = false;
+     updateBullets(){
+     myGameArea.context.drawImage(bullets, plane.x, plane.y, this.width, this.height, 3);
+    }
+
+    newPos(){
+        this.x += this.velocity;
+        
     }
 }
-
-// reset global variables
-function resetGlobalVariables(){
-    myClouds= [];
-    myBirds= [];
-    myGameArea.frames=0;
-    plane = new component(80, myGameArea.height/2, 443/2,302/2);
-}
-
-let points= null;
-function score(){
-    points = Math.floor(myGameArea.frames/5);
-    myGameArea.context.font= '30px serif';
-    myGameArea.context.fillStyle = 'black';
-    myGameArea.context.drawImage(cloudImg, myGameArea.width - 250, 20, 220, 100);
-    myGameArea.context.fillText(`Score: ${points}`, myGameArea.width - 200, 70);
-}
-
-//update game area
-function updateGameArea(){
-    myGameArea.clear();
-    myGameArea.context.drawImage(backgroundImg, 0, 0, myGameArea.width, myGameArea.height);
-    plane.newPos();
-    plane.updatePlane();
-    updateBirds();
-    checkGameOver();
-    score();
-};
 
 //controls
 document.addEventListener('keydown', (e) => {
@@ -224,9 +187,9 @@ document.addEventListener('keydown', (e) => {
             plane.speedX = 1;  
         }
         break;
-        //case 49: // spacebar
-        //myGameArea.context.drawImage(bullets, plane.x, plane.y, 10, 10, 0);
-       //break;
+        case 49: // spacebar
+        myBullets.push(new bullet(plane.x, plane.y, 10, 10, 3))
+        break;
         
     }
 });
@@ -236,8 +199,55 @@ document.addEventListener('keyup', (e) => {
     plane.speedY = 0;
 });
 
+// check if plane hit birds
+function checkGameOver(){
+    const crashed = myBirds.some(function (bird) {
+      return plane.crashWith(bird);
+    })
+  
+    if (crashed) {
+      myGameArea.stop();
+      document.getElementById('end-screen').style.display ='block';
+      document.getElementById('game-board').style.display = 'none';
+      document.getElementById('endscore').innerHTML= points;
+
+    }
+}
+
+// reset global variables
+function resetGlobalVariables(){
+    myClouds= [];
+    myBirds= [];
+    myGameArea.frames=0;
+    plane = new component(80, myGameArea.height/2, 443/2,302/2);
+}
+
+// score
+let points= null;
+function score(){
+    points = Math.floor(myGameArea.frames/5);
+    myGameArea.context.font= '30px serif';
+    myGameArea.context.fillStyle = 'black';
+    myGameArea.context.drawImage(cloudImg, myGameArea.width - 250, 20, 220, 100);
+    myGameArea.context.fillText(`Score: ${points}`, myGameArea.width - 200, 70);
+}
+
+//update game area
+function updateGameArea(){
+    myGameArea.clear();
+    myGameArea.context.drawImage(backgroundImg, 0, 0, myGameArea.width, myGameArea.height);
+    plane.newPos();
+    plane.updatePlane();
+    updateBirds();
+    checkGameOver();
+    score();
+};
+
+
+// buttons
 document.getElementById('game-board').style.display = 'none';
 
+// start button
 window.onload = () => {
     document.getElementById('start-button').onclick= () => {
        myGameArea.start()
@@ -245,6 +255,8 @@ window.onload = () => {
        document.getElementById('game-intro').style.display = 'none';
        audio.load();
     }
+
+// try again button
      document.getElementById('restart-button').onclick= () =>{
         document.getElementById('game-board').style.display = 'block';
         document.getElementById('end-screen').style.display = 'none';

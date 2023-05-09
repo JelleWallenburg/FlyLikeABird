@@ -5,7 +5,11 @@
         <link rel="stylesheet" href= "styles/styles.css" />
     </head>
     <body>
-        <audio src="/music/birds.mp3" id="audio"></audio>
+
+        <audio  id="starting-audio" autoplay>
+            <source src="/music/Starting-Screen.mp3" type="audio/mpeg">
+        </audio>
+
         <div id= "game-intro">
             <div id="start-screen">
                 <div id="title">
@@ -25,10 +29,14 @@
                 <li>Avoid the  <img src= "./images/birds/bird1.png" alt="Bird" class="bird-instructions" /> incoming</li>
                 <li>If you hit a  <img src= "./images/birds/bird1.png" alt="Bird" class="bird-instructions" /> it's <span id="game-over">GAME OVER</span></li>
             </ol>
+            
         </div>
         </div>
 
         <div id= "game-board">
+            <audio  id="audio" autoplay loop="loop">
+                <source src="/music/birds.mp3" type="audio/mpeg">
+            </audio>
             <canvas id= "canvas"  height=1000 width=1000></canvas>
         </div>
 
