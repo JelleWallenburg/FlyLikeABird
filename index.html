@@ -6,9 +6,9 @@
     </head>
     <body>
 
-        <audio  id="starting-audio" autoplay>
-            <source src="/music/Starting-Screen.mp3" type="audio/mpeg">
-        </audio>
+        <!-- <audio  id="starting-audio" autoplay>
+            <source src="music/Starting-Screen.mp3" type="audio/mpeg">
+        </audio> -->
 
         <div id= "game-intro">
             <div id="start-screen">
@@ -34,10 +34,13 @@
         </div>
 
         <div id= "game-board">
-            <audio  id="audio" autoplay loop="loop">
-                <source src="/music/birds.mp3" type="audio/mpeg">
+            <audio  id="audio1" autoplay loop="loop">
+                <source src="./music/birds.mp3" type="audio/mpeg">
             </audio>
-            <canvas id= "canvas"  height=1000 width=1000></canvas>
+            <audio  id="audio2" autoplay loop="loop">
+                <source src="./music/gunshot.mp3" type="audio/mpeg">
+            </audio>
+            <canvas id= "canvas"  height="1000" width="1000"></canvas>
         </div>
 
         <div id="end-screen">

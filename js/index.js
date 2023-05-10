@@ -6,6 +6,10 @@ const planeImg1= new Image();
 planeImg1.src= './images/plane/Fly (1).png';
 const planeImg2= new Image();
 planeImg2.src= './images/plane/Fly (2).png';
+const planeShooting1= new Image();
+planeShooting1.src = './images/plane/Shoot (2).png';
+const planeShooting2= new Image();
+planeShooting2.src = './images/plane/Shoot (3).png';
 
 const birdImg= new Image();
 birdImg.src= './images/birds/bird1.png';
@@ -25,7 +29,8 @@ const bulletImg5= new Image();
 bulletImg5.src='images/bullet/Bullet (5).png'
 
 // audio
-let audio = document.getElementById("audio");
+let audio1 = document.getElementById("audio1");
+let audio2 = document.getElementById("audio2");
 //let startingAudio = document.getElementById("starting-audio");
 
 
@@ -57,8 +62,9 @@ const myGameArea ={
 
 
 //create class for plane and birds
+let shooting = 0;
 class component {
-    constructor(x, y, width, height ){
+    constructor(x, y, width, height){
         this.x= x;
         this.y= y;
         this.width= width;
@@ -69,17 +75,21 @@ class component {
     }
 
     updatePlane(){
+        if(shooting == 0){
+            if (myGameArea.frames % 2 === 0) {
+                myGameArea.context.drawImage(planeImg1, this.x, this.y, this.width, this.height);
+               } else {
+                myGameArea.context.drawImage(planeImg2, this.x, this.y, this.width, this.height);
+               };
+        } else {
+            if (myGameArea.frames % 2 === 0) {
+                myGameArea.context.drawImage(planeShooting1, this.x, this.y, this.width, this.height);
+               } else {
+                myGameArea.context.drawImage(planeShooting2, this.x, this.y, this.width, this.height);
+               };
+        } 
+    }   
 
-
-
-
-        if (myGameArea.frames % 2 === 0) {
-            myGameArea.context.drawImage(planeImg2, this.x, this.y, this.width, this.height);
-           } else {
-            myGameArea.context.drawImage(planeImg1, this.x, this.y, this.width, this.height);
-           };
-
-    }
 
     updateBirds(){
         myGameArea.context.drawImage(birdImg, this.x, this.y, this.width, this.height);
@@ -129,26 +139,45 @@ class component {
 //create plane
 let plane = new component(80, myGameArea.height/2, 443/2,302/2);
 
-//create birds
+// create bullets and birds
+let myBullets = [];
 let myBirds = [];
-function updateBirds(){
+function updateBullets(){
     myGameArea.frames +=1;
+    for(let i=0; i < myBullets.length; i++){
+        myBullets[i].x +=2;
+        myBullets[i].updateBullets();
+    }
+}
 
+//create birds
+//let myBirds = [];
+function updateBirds(){
     if (myGameArea.frames % 150 === 0) {
         let y= Math.random()*myGameArea.height;
         myBirds.push(new component(myGameArea.width, y, 100 ,70))
     }
 
+    for(let i=0; i < myBullets.length; i++){
+        for(let j=0; j < myBirds.length; j++){
+            if(myBullets[i].crashWith(myBirds[j])){
+                myBirds.splice(j,1);
+                myBullets.splice(i,1);
+            }
+        }
+    }
+
     for(let i=0; i <myBirds.length; i++){
+        // if (myBirds[i].shotDown()){
+        //     myBirds.splice(i,1)
+        // }
         myBirds[i].x -= 1;
         myBirds[i].updateBirds();
     }
 }
 
-
 let myClouds = [];
 function updateClouds(){
-    // myGameArea.frames +=1;
 
     if(myGameArea.frames % 120 == 0){
         let y= Math.random()*myGameArea.height;
@@ -162,16 +191,6 @@ function updateClouds(){
     let y= Math.random()*myGameArea.height;
 }
 
-// create bullets
-let myBullets =[];
-function updateBullets(){
-    for(let i=0; i < myBullets.length; i++){
-        myBullets[i].x +=2;
-        myBullets[i].updateBullets();
-    }
-}
-
-
 //controls
 document.addEventListener('keydown', (e) => {
     switch (e.keyCode) {
@@ -184,7 +203,7 @@ document.addEventListener('keydown', (e) => {
         break;
       case 40: // down arrow
         if(plane.y >= myGameArea.canvas.height - plane.height) {
-            plane.speedY= myGameArea.canvas.height - plane-height;
+            plane.speedY= myGameArea.canvas.height - plane.height;
         } else{
             plane.speedY +=1;
         }
@@ -205,21 +224,17 @@ document.addEventListener('keydown', (e) => {
         break;
       case 32: // spacebar
         myBullets.push(new component((plane.x+0.7*plane.width), (plane.y+0.65*plane.height), 40, 40))
+        shooting= 1;
+        audio2.load();
         break; 
     }
 });
 
-
-// document.addEventListener('keydown', (e) => {
-//     switch (e.keyCode) {
-//         case 32:
-
-//     }
-
-
 document.addEventListener('keyup', (e) => {
     plane.speedX = 0;
     plane.speedY = 0;
+    shooting = 0;
+    audio2.pause();
 });
 
 // check if plane hit birds
@@ -261,9 +276,9 @@ function updateGameArea(){
     myGameArea.context.drawImage(backgroundImg, 0, 0, myGameArea.width, myGameArea.height);
     plane.newPos();
     plane.updatePlane();
+    updateBullets();
     updateBirds();
     updateClouds();
-    updateBullets();
     checkGameOver();
     score();
 };
@@ -278,7 +293,7 @@ window.onload = () => {
        myGameArea.start()
        document.getElementById('game-board').style.display = 'block';
        document.getElementById('game-intro').style.display = 'none';
-    //    audio.load();
+       audio1.load();
     }
 
 // try again button
