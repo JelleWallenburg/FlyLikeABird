@@ -250,10 +250,7 @@ function checkGameOver(){
       document.getElementById('game-board').style.display = 'none';
       document.getElementById('endscore').innerHTML= points;
       document.getElementById("audio").muted = true;
-      gameOverAudio.play();
-      
-      
-
+      gameOverAudio.play();gi
     }
 }
 console.log(gameOverAudio);
