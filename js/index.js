@@ -31,6 +31,7 @@ bulletImg5.src='images/bullet/Bullet (5).png'
 // audio
 let audio1 = document.getElementById("audio1");
 let audio2 = document.getElementById("audio2");
+let gameOverAudio = document.getElementById("game-over-audio");
 //let startingAudio = document.getElementById("starting-audio");
 
 
@@ -248,9 +249,14 @@ function checkGameOver(){
       document.getElementById('end-screen').style.display ='block';
       document.getElementById('game-board').style.display = 'none';
       document.getElementById('endscore').innerHTML= points;
+      document.getElementById("audio").muted = true;
+      gameOverAudio.play();
+      
+      
 
     }
 }
+console.log(gameOverAudio);
 
 // reset global variables
 function resetGlobalVariables(){
@@ -293,13 +299,15 @@ window.onload = () => {
        myGameArea.start()
        document.getElementById('game-board').style.display = 'block';
        document.getElementById('game-intro').style.display = 'none';
-       audio1.load();
+       audio1.play();
     }
 
 // try again button
      document.getElementById('restart-button').onclick= () =>{
         document.getElementById('game-board').style.display = 'block';
         document.getElementById('end-screen').style.display = 'none';
+        document.getElementById("game-over-audio").muted = true;
+        document.getElementById("audio").muted = false;
         resetGlobalVariables();
         myGameArea.start();
     }
