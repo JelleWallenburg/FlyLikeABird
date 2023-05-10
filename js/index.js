@@ -126,18 +126,6 @@ class component {
     }
 }
 
-class componentx {
-    constructor(x, y, width, height ){
-        this.x= x;
-        this.y= y;
-        this.width= width;
-        this.height= height;
-
-        this.speedX = 0;
-        this.speedY = 0;
-    }
-}
-
 //create plane
 let plane = new component(80, myGameArea.height/2, 443/2,302/2);
 
