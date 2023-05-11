@@ -32,7 +32,6 @@ bulletImg5.src='images/bullet/Bullet (5).png'
 let audio1 = document.getElementById("audio1");
 let audio2 = document.getElementById("audio2");
 let gameOverAudio = document.getElementById("game-over-audio");
-//let startingAudio = document.getElementById("starting-audio");
 
 
 // setting size of the canvas
@@ -152,7 +151,6 @@ function updateBullets(){
 }
 
 //create birds
-//let myBirds = [];
 function updateBirds(){
     if (myGameArea.frames % 150 === 0) {
         let y= Math.random()*myGameArea.height;
@@ -257,6 +255,7 @@ console.log(gameOverAudio);
 
 // reset global variables
 function resetGlobalVariables(){
+    myBullets = []
     myClouds= [];
     myBirds= [];
     myGameArea.frames=0;
