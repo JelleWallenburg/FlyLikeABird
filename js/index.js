@@ -249,7 +249,7 @@ function checkGameOver(){
       document.getElementById('end-screen').style.display ='block';
       document.getElementById('game-board').style.display = 'none';
       document.getElementById('endscore').innerHTML= points;
-      document.getElementById("audio").muted = true;
+      document.getElementById("audio1").muted = true;
       gameOverAudio.play();
     }
 }
@@ -304,7 +304,7 @@ window.onload = () => {
         document.getElementById('game-board').style.display = 'block';
         document.getElementById('end-screen').style.display = 'none';
         document.getElementById("game-over-audio").muted = true;
-        document.getElementById("audio").muted = false;
+        document.getElementById("audio1").muted = false;
         resetGlobalVariables();
         myGameArea.start();
     }
