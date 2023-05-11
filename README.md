@@ -26,18 +26,20 @@ Improving the UI
 Data structure
 
 const myGameArea {
+
  - start();
  - clear();
  - stop();
+
 }
 
 class component {
-     - this.x
-     - this.y
-     - this.width
-     - this.height
-     - this.speedX
-     - this.speedY
+- this.x
+- this.y
+- this.width
+- this.height
+- this.speedX
+- this.speedY
 
 - updatePlane();
 - updateBirds();
@@ -51,49 +53,49 @@ class component {
 - crashwith(bird);
 }
 
-checkGameOver();
-resetGlobalVariables();
-score();
-updateGameArea();
+- checkGameOver();
+- resetGlobalVariables();
+- score();
+- updateGameArea();
 
 States 
 
-Start Screen
-Game Screen (Canva)
-End Screen 
+- Start Screen
+- Game Screen (Canva)
+- End Screen 
 
-// Task
+Task
 
-Setup Github Repo
-Create HTML, CSS and Javascript pages
-Create Start Screen
-Create Main Screen (Canva)
-Create End Screen
-Style Start Screen
-Create Instructions 
-Create Start Button
-Add Functionality to Start Button
-Make Plane
-Make Plane move
-Make Clouds and Birds
-Make birds and clouds move
-Make birds crash with plane
-Create Shooting and bullets
-Make bullets crash with birds
-Add audio
-Create Score
-Create Endscreen 
-Make Try again button
-Style Endscreen 
-Deploy game on Gitpages
+1. Setup Github Repo
+2. Create HTML, CSS and Javascript pages
+3. Create Start Screen
+4. Create Main Screen (Canva)
+5. Create End Screen
+6. Style Start Screen
+7. Create Instructions 
+8. Create Start Button
+9. Add Functionality to Start Button
+10. Make Plane
+11. Make Plane move
+12. Make Clouds and Birds
+13. Make birds and clouds move
+14. Make birds crash with plane
+15. Create Shooting and bullets
+16. Make bullets crash with birds
+17. Add audio
+18. Create Score
+19. Create Endscreen 
+20. Make Try again button
+21. Style Endscreen 
+22. Deploy game on Gitpages
 
 
 
-// Links
-Trello Link [https://trello.com/invite/b/QNt74Z0W/ATTIa8f7c485288693b05e848f4b9525a8ca8CEB89E6/project-tasks]
+Links
+[Trello Link](https://trello.com/invite/b/QNt74Z0W/ATTIa8f7c485288693b05e848f4b9525a8ca8CEB89E6/project-tasks)
 
 Slides Link
 
-Github repository Link [https://github.com/JelleWallenburg/FlyLikeABird.git]
+[Github repository Link](https://github.com/JelleWallenburg/FlyLikeABird.git)
 
 Deployment Link
