@@ -1,6 +1,6 @@
 FLY LIKE A BIRD
 
-// Click here to see deployed game
+[Click here to see deployed game](https://jellewallenburg.github.io/FlyLikeABird/)
 
 Description
 
@@ -92,10 +92,11 @@ Task
 
 
 Links
+
 [Trello Link](https://trello.com/invite/b/QNt74Z0W/ATTIa8f7c485288693b05e848f4b9525a8ca8CEB89E6/project-tasks)
 
-Slides Link
+[Slides Link](https://docs.google.com/presentation/d/1-dSswA3M9k-2wzaPvFfC0JUVuKH8tDviY82rufN61n8/edit#slide=id.g1e289290fda_0_518)
 
 [Github repository Link](https://github.com/JelleWallenburg/FlyLikeABird.git)
 
-Deployment Link
+[Deployment Link](https://jellewallenburg.github.io/FlyLikeABird/)
