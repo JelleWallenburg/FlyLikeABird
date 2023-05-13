@@ -177,6 +177,7 @@ function updateBirds(){
 
 let myClouds = [];
 function updateClouds(){
+    //myGameArea.frames +=1;
 
     if(myGameArea.frames % 120 == 0){
         let y= Math.random()*myGameArea.height;
@@ -202,7 +203,7 @@ document.addEventListener('keydown', (e) => {
         break;
       case 40: // down arrow
         if(plane.y >= myGameArea.canvas.height - plane.height) {
-            plane.speedY= myGameArea.canvas.height - plane.height;
+            plane.y= myGameArea.canvas.height - plane.height;
         } else{
             plane.speedY +=1;
         }
@@ -218,7 +219,7 @@ document.addEventListener('keydown', (e) => {
         if(plane.x >= myGameArea.canvas.width- plane.width){
             plane.x= myGameArea.canvas.width - plane.width;
         } else {
-            plane.speedX = 1;  
+            plane.speedX += 1;  
         }
         break;
       case 32: // spacebar
